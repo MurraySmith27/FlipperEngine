@@ -104,6 +104,7 @@
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_types.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_version.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_video.h" />
+    <ClInclude Include="src\Flipper\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Flipper\Application.cpp">
@@ -115,6 +116,7 @@
     <ClCompile Include="src\Flipper\Render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Flipper\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libjpeg-9.dll" />
@@ -168,11 +170,6 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{a404185d-c9ba-499a-b3e6-b8546f953f69}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Z.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vendor\SDL2-2.0.12\BUGS.txt" />

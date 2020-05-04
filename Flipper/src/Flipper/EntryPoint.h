@@ -9,7 +9,13 @@ extern Flipper::Application* Flipper::CreateApplication();
 	
 int main(int argc, char** argv) {
 
-	std::cout << "Welcome to the Flipper Engine!" << std::endl;
+	Flipper::Log::Init();
+
+	FLIPPER_CORE_INFO("Hello Green World!");
+
+	const char* sharks = "Ogres!";
+
+	FLIPPER_WARNING("Too many {0}", sharks);
 
 	auto app = Flipper::CreateApplication();
 

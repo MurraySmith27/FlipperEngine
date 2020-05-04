@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Flipper\Log.h" />
     <ClInclude Include="src\Flipper\Application.h" />
     <ClInclude Include="src\FlipperEngine.h" />
     <ClInclude Include="src\Flipper\Core.h" />
@@ -104,6 +105,7 @@
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_vulkan.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Flipper\Log.cpp" />
     <ClCompile Include="src\Flipper\Application.cpp" />
     <ClCompile Include="src\Flipper\PlayerControl.cpp" />
     <ClCompile Include="src\Flipper\Render.cpp" />
@@ -149,9 +151,6 @@
     <None Include="Vendor\SDL2-2.0.12\lib\x64\zlib1.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x86\SDL2.dll" />
     <None Include="zlib1.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Z.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Vendor\SDL2-2.0.12\BUGS.txt" />
@@ -216,7 +215,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Flipper\Vendor\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Flipper\Vendor\SDL2-2.0.12\include;$(SolutionDir)\Flipper\Vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>FLIPPER_PLATFORM_WINDOWS;FLIPPER_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

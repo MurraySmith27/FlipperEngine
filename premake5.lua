@@ -20,7 +20,13 @@ project "Flipper"
 
     files{
         --** specifies to recursively search child folders
-        "%{prj.name}/**"
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/*.dll",
+        "%{prj.name}/Vendor/spdlog/include/spdlog/spdlog.h",
+        "%{prj.name}/Vendor/spdlog/include/spdlog/sinks/sdtout_color_sinks.h",
+        "%{prj.name}/Vendor/SDL2-2.0.12/lib/x64/*",
+        "%{prj.name}/Vendor/SDL2-2.0.12/include/*"
     }
 
     includedirs {
@@ -79,7 +85,9 @@ project "Sandbox"
 
     files{
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/**.dll",
+        "%{prj.name}/**.lib"
     }
 
     includedirs

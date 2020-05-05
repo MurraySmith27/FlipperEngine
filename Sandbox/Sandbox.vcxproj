@@ -140,6 +140,10 @@
     <ClCompile Include="src\sandboxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Flipper\Flipper.vcxproj">
       <Project>{57BFC413-C39E-43AF-CCB6-CE853815AA10}</Project>
     </ProjectReference>

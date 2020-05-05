@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -9,17 +9,146 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{57BFC413-C39E-43AF-CCB6-CE853815AA10}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Flipper</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Debug-windows-x86_64\Flipper\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\Flipper\</IntDir>
+    <TargetName>Flipper</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Release-windows-x86_64\Flipper\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\Flipper\</IntDir>
+    <TargetName>Flipper</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\bin\Dist-windows-x86_64\Flipper\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\Flipper\</IntDir>
+    <TargetName>Flipper</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>FLIPPER_PLATFORM_WINDOWS;FLIPPER_BUILD_DLL;FLIPPER_DEBUG;SPDLOG_COMPILED_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Vendor\spdlog\include;Vendor\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Vendor\SDL2-2.0.12\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Debug-windows-x86_64\Flipper\Flipper.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Flipper\Flipper.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Flipper\Flipper.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Flipper\Flipper.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>FLIPPER_PLATFORM_WINDOWS;FLIPPER_BUILD_DLL;FLIPPER_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Vendor\spdlog\include;Vendor\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Vendor\SDL2-2.0.12\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Release-windows-x86_64\Flipper\Flipper.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Flipper\Flipper.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Flipper\Flipper.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Flipper\Flipper.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>FLIPPER_PLATFORM_WINDOWS;FLIPPER_BUILD_DLL;FLIPPER_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Vendor\spdlog\include;Vendor\SDL2-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Vendor\SDL2-2.0.12\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>..\bin\Dist-windows-x86_64\Flipper\Flipper.lib</ImportLibrary>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\Flipper\Flipper.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\Flipper\Flipper.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\Flipper\Flipper.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Flipper\Log.h" />
-    <ClInclude Include="src\Flipper\Application.h" />
-    <ClInclude Include="src\FlipperEngine.h" />
-    <ClInclude Include="src\Flipper\Core.h" />
-    <ClInclude Include="src\Flipper\EntryPoint.h" />
-    <ClInclude Include="src\Flipper\PlayerControl.h" />
-    <ClInclude Include="src\Flipper\Render.h" />
-    <ClInclude Include="Vendor\SDL2-2.0.12\include\begin_code.h" />
-    <ClInclude Include="Vendor\SDL2-2.0.12\include\close_code.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_assert.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_atomic.h" />
@@ -61,13 +190,13 @@
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_mutex.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_name.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengl.h" />
+    <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengl_glext.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles2.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles2_gl2.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles2_gl2ext.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles2_gl2platform.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengles2_khrplatform.h" />
-    <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_opengl_glext.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_pixels.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_platform.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_power.h" />
@@ -103,21 +232,158 @@
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_version.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_video.h" />
     <ClInclude Include="Vendor\SDL2-2.0.12\include\SDL_vulkan.h" />
+    <ClInclude Include="Vendor\SDL2-2.0.12\include\begin_code.h" />
+    <ClInclude Include="Vendor\SDL2-2.0.12\include\close_code.h" />
+    <ClInclude Include="Vendor\spdlog\bench\utils.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\argv.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\env.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\helpers.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\log_levels.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\common-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\common.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\os.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\registry.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\locale.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\posix.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\formatter.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fwd.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\logger-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\logger.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\spdlog.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\tweakme.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\version.h" />
+    <ClInclude Include="Vendor\spdlog\tests\catch.hpp" />
+    <ClInclude Include="Vendor\spdlog\tests\includes.h" />
+    <ClInclude Include="Vendor\spdlog\tests\test_sink.h" />
+    <ClInclude Include="Vendor\spdlog\tests\utils.h" />
+    <ClInclude Include="src\Flipper\Application.h" />
+    <ClInclude Include="src\Flipper\Core.h" />
+    <ClInclude Include="src\Flipper\EntryPoint.h" />
+    <ClInclude Include="src\Flipper\Log.h" />
+    <ClInclude Include="src\Flipper\PlayerControl.h" />
+    <ClInclude Include="src\Flipper\Render.h" />
+    <ClInclude Include="src\FlipperEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Flipper\Log.cpp" />
+    <ClCompile Include="Vendor\spdlog\bench\async_bench.cpp" />
+    <ClCompile Include="Vendor\spdlog\bench\bench.cpp" />
+    <ClCompile Include="Vendor\spdlog\bench\formatter-bench.cpp" />
+    <ClCompile Include="Vendor\spdlog\bench\latency.cpp" />
+    <ClCompile Include="Vendor\spdlog\example\example.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\async.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\cfg.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\color_sinks.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\file_sinks.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\fmt.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\spdlog.cpp" />
+    <ClCompile Include="Vendor\spdlog\src\stdout_sinks.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\main.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_async.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_backtrace.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_cfg.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_create_dir.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_daily_logger.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_dup_filter.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_errors.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_eventlog.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_file_helper.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_file_logging.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_fmt_helper.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_macros.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_misc.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_mpmc_q.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_pattern_formatter.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_registry.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_stdout_api.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_systemd.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\test_time_point.cpp" />
+    <ClCompile Include="Vendor\spdlog\tests\utils.cpp" />
     <ClCompile Include="src\Flipper\Application.cpp" />
+    <ClCompile Include="src\Flipper\Log.cpp" />
     <ClCompile Include="src\Flipper\PlayerControl.cpp" />
     <ClCompile Include="src\Flipper\Render.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="libjpeg-9.dll" />
-    <None Include="libpng16-16.dll" />
-    <None Include="libtiff-5.dll" />
-    <None Include="libwebp-7.dll" />
+    <None Include="Flipper.vcxproj" />
+    <None Include="Flipper.vcxproj.filters" />
+    <None Include="Flipper.vcxproj.user" />
     <None Include="SDL2.dll" />
     <None Include="SDL2_image.dll" />
-    <None Include="Vendor\SDL2-2.0.12\docs\doxyfile" />
+    <None Include="Vendor\SDL2-2.0.12\BUGS.txt" />
+    <None Include="Vendor\SDL2-2.0.12\COPYING.txt" />
+    <None Include="Vendor\SDL2-2.0.12\README-SDL.txt" />
+    <None Include="Vendor\SDL2-2.0.12\README.txt" />
+    <None Include="Vendor\SDL2-2.0.12\WhatsNew.txt" />
     <None Include="Vendor\SDL2-2.0.12\docs\README-android.md" />
     <None Include="Vendor\SDL2-2.0.12\docs\README-cmake.md" />
     <None Include="Vendor\SDL2-2.0.12\docs\README-directfb.md" />
@@ -139,105 +405,57 @@
     <None Include="Vendor\SDL2-2.0.12\docs\README-windows.md" />
     <None Include="Vendor\SDL2-2.0.12\docs\README-winrt.md" />
     <None Include="Vendor\SDL2-2.0.12\docs\README.md" />
+    <None Include="Vendor\SDL2-2.0.12\docs\doxyfile" />
     <None Include="Vendor\SDL2-2.0.12\include\SDL_config.h.cmake" />
     <None Include="Vendor\SDL2-2.0.12\include\SDL_config.h.in" />
     <None Include="Vendor\SDL2-2.0.12\include\SDL_config_macosx.h.orig" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2.dll" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2.lib" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2_image.dll" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2_image.lib" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2main.lib" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2test.lib" />
     <None Include="Vendor\SDL2-2.0.12\lib\x64\libjpeg-9.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x64\libpng16-16.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x64\libtiff-5.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x64\libwebp-7.dll" />
-    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2.dll" />
-    <None Include="Vendor\SDL2-2.0.12\lib\x64\SDL2_image.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x64\zlib1.dll" />
     <None Include="Vendor\SDL2-2.0.12\lib\x86\SDL2.dll" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x86\SDL2.lib" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x86\SDL2main.lib" />
+    <None Include="Vendor\SDL2-2.0.12\lib\x86\SDL2test.lib" />
+    <None Include="Vendor\spdlog\.clang-format" />
+    <None Include="Vendor\spdlog\.clang-tidy" />
+    <None Include="Vendor\spdlog\.git" />
+    <None Include="Vendor\spdlog\.gitattributes" />
+    <None Include="Vendor\spdlog\.gitignore" />
+    <None Include="Vendor\spdlog\.travis.yml" />
+    <None Include="Vendor\spdlog\CMakeLists.txt" />
+    <None Include="Vendor\spdlog\INSTALL" />
+    <None Include="Vendor\spdlog\LICENSE" />
+    <None Include="Vendor\spdlog\README.md" />
+    <None Include="Vendor\spdlog\appveyor.yml" />
+    <None Include="Vendor\spdlog\bench\CMakeLists.txt" />
+    <None Include="Vendor\spdlog\cmake\ide.cmake" />
+    <None Include="Vendor\spdlog\cmake\pch.h.in" />
+    <None Include="Vendor\spdlog\cmake\spdlog.pc.in" />
+    <None Include="Vendor\spdlog\cmake\spdlogCPack.cmake" />
+    <None Include="Vendor\spdlog\cmake\spdlogConfig.cmake.in" />
+    <None Include="Vendor\spdlog\cmake\utils.cmake" />
+    <None Include="Vendor\spdlog\cmake\version.rc.in" />
+    <None Include="Vendor\spdlog\example\CMakeLists.txt" />
+    <None Include="Vendor\spdlog\include\spdlog\fmt\bundled\LICENSE.rst" />
+    <None Include="Vendor\spdlog\logos\jetbrains-variant-4.svg" />
+    <None Include="Vendor\spdlog\scripts\extract_version.py" />
+    <None Include="Vendor\spdlog\scripts\format.sh" />
+    <None Include="Vendor\spdlog\tests\CMakeLists.txt" />
+    <None Include="Vendor\spdlog\tests\catch.license" />
+    <None Include="libjpeg-9.dll" />
+    <None Include="libpng16-16.dll" />
+    <None Include="libtiff-5.dll" />
+    <None Include="libwebp-7.dll" />
     <None Include="zlib1.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Vendor\SDL2-2.0.12\BUGS.txt" />
-    <Text Include="Vendor\SDL2-2.0.12\COPYING.txt" />
-    <Text Include="Vendor\SDL2-2.0.12\README-SDL.txt" />
-    <Text Include="Vendor\SDL2-2.0.12\README.txt" />
-    <Text Include="Vendor\SDL2-2.0.12\WhatsNew.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="Vendor\SDL2-2.0.12\lib\x64\SDL2.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x64\SDL2main.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x64\SDL2test.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x64\SDL2_image.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x86\SDL2.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x86\SDL2main.lib" />
-    <Library Include="Vendor\SDL2-2.0.12\lib\x86\SDL2test.lib" />
-  </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{D4D58979-CB11-46FF-8870-C187C21B561B}</ProjectGuid>
-    <RootNamespace>Flipper</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(SolutionDir)Flipper\Vendor\SDL2-2.0.12\lib\x64\;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Flipper\Vendor\SDL2-2.0.12\include;$(SolutionDir)\Flipper\Vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>FLIPPER_PLATFORM_WINDOWS;FLIPPER_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

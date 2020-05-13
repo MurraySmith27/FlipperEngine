@@ -12,7 +12,7 @@ namespace Flipper {
 		virtual ~Application();
 
 
-		void Run();
+		virtual void Run();
 
 	};
 	

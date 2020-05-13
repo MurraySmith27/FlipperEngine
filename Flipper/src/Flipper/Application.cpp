@@ -1,4 +1,8 @@
+#include "flpch.h"
 #include "Application.h"
+#include "Render.h"
+#include "Log.h"
+
 
 namespace Flipper {
 	Application::Application() {
@@ -13,6 +17,7 @@ namespace Flipper {
 	}
 
 	void Application::Run() {
-		while (true);
+		FLIPPER_CORE_INFO("Reached run method from Application");
+		
 	}
 }

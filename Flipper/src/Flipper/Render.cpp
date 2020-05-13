@@ -1,4 +1,6 @@
+#include "flpch.h"
 #include "Render.h"
+#include "Log.h"
 
 namespace Flipper {
 	RenderObject::RenderObject(const char* texture_id, SDL_Texture* texture, int x, int y, int w, int h) :id(texture_id), texture(texture) {
@@ -27,12 +29,26 @@ namespace Flipper {
 
 	Renderer::Renderer(const char* window_title, int w, int h) :window_title(window_title), window_h(h), window_w(w) {
 
+		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 
-		window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
+			FLIPPER_CORE_ERROR("Couldn't initialize SDL Video");
+		}
 
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		this->window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
+
+		this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+
+
+		IMG_Init(IMG_INIT_PNG);
+
+		/*int imgFlags = IMG_INIT_PNG;
+
+		if (!(IMG_Init(imgFlags) & imgFlags)) {
+
+			FLIPPER_CORE_ERROR("Could not initialize SDL png");
+		}*/
 
 		//allocating space for 10 textures to start
 		texture_stack.reserve(10);
@@ -51,7 +67,7 @@ namespace Flipper {
 
 		SDL_DestroyWindow(window);
 		delete window;
-
+		IMG_Quit();
 		SDL_Quit();
 	};
 
@@ -76,7 +92,10 @@ namespace Flipper {
 
 		SDL_Texture* tex = NULL;
 
-		SDL_Surface* temp_surface = IMG_Load(image_path);
+		
+		//temp_surface = IMG_Load(image_path);
+
+		SDL_Surface* temp_surface = SDL_LoadBMP(image_path);
 
 		if (temp_surface == NULL) {
 			throw BMPLoadFailureException();

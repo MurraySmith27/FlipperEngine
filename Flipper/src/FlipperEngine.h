@@ -4,9 +4,10 @@
 
 //#include "Flipper\Render.h"
 //#include "Flipper\PlayerControl.h"
-#include <iostream>
+#include "Flipper/flpch.h"
 #include "Flipper/Log.h"
 #include "Flipper/Application.h"
 #include "Flipper/EntryPoint.h"
+#include "Flipper/Render.h"
 
 #endif

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "flpch.h"
 
 #ifdef FLIPPER_PLATFORM_WINDOWS
 
@@ -11,11 +11,7 @@ int main(int argc, char** argv) {
 
 	Flipper::Log::Init();
 
-	FLIPPER_CORE_INFO("Hello Green World!");
-
-	const char* sharks = "Ogres!";
-
-	FLIPPER_WARNING("Too many {0}", sharks);
+	FLIPPER_CORE_INFO("Welcome to the Flipper Engine");
 
 	auto app = Flipper::CreateApplication();
 
@@ -23,7 +19,7 @@ int main(int argc, char** argv) {
 
 	delete app;
 
-
+	return 0;
 }
 
 

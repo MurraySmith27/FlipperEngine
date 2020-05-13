@@ -15,6 +15,32 @@ public:
 	}
 
 
+	void Run() override {
+		//This is the first thing that gets called.
+		FLIPPER_INFO("Running from client");
+
+		Flipper::Renderer* my_renderer = new Flipper::Renderer("My Window", 600, 600);
+
+
+		my_renderer->texture_stack_push("Kirby", "hello_world.bmp", 300, 300);
+
+		bool running = true; 
+
+		SDL_Event e;
+
+		while (running) {
+			//move through the entire event queue
+			while (SDL_PollEvent(&e) != 0) {
+				if (e.type == SDL_QUIT) {
+					running = false;
+				}
+
+				my_renderer->update();
+
+			}
+		}
+	}
+
 };
 
 

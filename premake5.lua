@@ -18,6 +18,9 @@ project "Flipper"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "flpch.h"
+    pchsource "Flipper/src/Flipper/flpch.cpp"
+
     files{
         --** specifies to recursively search child folders
         "%{prj.name}/src/**.h",
@@ -30,7 +33,7 @@ project "Flipper"
     }
 
     includedirs {
-
+        "${prj.name}/src",
         "%{prj.name}/Vendor/spdlog/include",
         "%{prj.name}/Vendor/SDL2-2.0.12/include"
 
@@ -42,7 +45,8 @@ project "Flipper"
 
     links{
         "SDL2main.lib",
-        "SDL2_image.lib"
+        "SDL2_image.lib",
+        "SDL2.lib"
     }
     --filters are used to specify behaviour on different platforms
     filter "system:windows"
@@ -104,7 +108,8 @@ project "Sandbox"
     links {
         "Flipper",
         "SDL2main.lib",
-        "SDL2_image.lib"
+        "SDL2_image.lib",
+        "SDL2.lib"
         
     }
 

@@ -315,6 +315,9 @@
     <ClInclude Include="src\Flipper\Render.h">
       <Filter>src\Flipper</Filter>
     </ClInclude>
+    <ClInclude Include="src\Flipper\flpch.h">
+      <Filter>src\Flipper</Filter>
+    </ClInclude>
     <ClInclude Include="src\FlipperEngine.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -330,6 +333,9 @@
       <Filter>src\Flipper</Filter>
     </ClCompile>
     <ClCompile Include="src\Flipper\Render.cpp">
+      <Filter>src\Flipper</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Flipper\flpch.cpp">
       <Filter>src\Flipper</Filter>
     </ClCompile>
   </ItemGroup>

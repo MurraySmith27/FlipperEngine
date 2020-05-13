@@ -11,10 +11,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include <exception>
-#include <SDL.h>
-#include <vector>
-#include <SDL_image.h>
+
 #include "Core.h"
 
 namespace Flipper {

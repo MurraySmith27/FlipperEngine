@@ -22,7 +22,7 @@ public:
 		Flipper::Renderer* my_renderer = new Flipper::Renderer("My Window", 600, 600);
 
 
-		my_renderer->texture_stack_push("Kirby", "hello_world.bmp", 300, 300);
+		my_renderer->texture_stack_push("example_image", "hello.bmp", 300, 300);
 
 		bool running = true; 
 

@@ -43,13 +43,6 @@ namespace Flipper {
 
 		IMG_Init(IMG_INIT_PNG);
 
-		/*int imgFlags = IMG_INIT_PNG;
-
-		if (!(IMG_Init(imgFlags) & imgFlags)) {
-
-			FLIPPER_CORE_ERROR("Could not initialize SDL png");
-		}*/
-
 		//allocating space for 10 textures to start
 		texture_stack.reserve(10);
 
@@ -93,11 +86,14 @@ namespace Flipper {
 		SDL_Texture* tex = NULL;
 
 		
-		//temp_surface = IMG_Load(image_path);
+		//SDL_Surface* temp_surface = IMG_Load(image_path);
 
 		SDL_Surface* temp_surface = SDL_LoadBMP(image_path);
 
 		if (temp_surface == NULL) {
+
+			FLIPPER_CORE_ERROR("Error with IMG_Load: {0}", IMG_GetError());
+
 			throw BMPLoadFailureException();
 		}
 

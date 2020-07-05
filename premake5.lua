@@ -33,7 +33,7 @@ project "Flipper"
     }
 
     includedirs {
-        "${prj.name}/src",
+        "%{prj.name}/src/",
         "%{prj.name}/Vendor/spdlog/include",
         "%{prj.name}/Vendor/SDL2-2.0.12/include"
 
@@ -68,15 +68,21 @@ project "Flipper"
 
     filter "configurations:Debug"
           defines "FLIPPER_DEBUG"
+          buildoptions "/MDd"
           symbols "On"
+        
 
     filter "configurations:Release"
           defines "FLIPPER_RELEASE"
+          buildoptions "/MD"
           optimize "On"
+          
 
     filter "configurations:Dist"
           defines "FLIPPER_DIST"
+          buildoptions "/MD"
           optimize "On"
+          
 
 
 project "Sandbox"
@@ -125,12 +131,15 @@ project "Sandbox"
     
     filter "configurations:Debug"
         defines "FLIPPER_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
     
     filter "configurations:Release"
         defines "FLIPPER_RELEASE"
+        buildoptions "/MD"
         optimize "On"
     
     filter "configurations:Dist"
         defines "FLIPPER_DIST"
+        buildoptions "/MD"
         optimize "On"

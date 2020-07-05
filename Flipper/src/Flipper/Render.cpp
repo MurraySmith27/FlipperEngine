@@ -31,7 +31,7 @@ namespace Flipper {
 
 		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 
-			FLIPPER_CORE_ERROR("Couldn't initialize SDL Video");
+			FLIPPER_CORE_ERROR("Couldn't initialize SDL Video: {0}", SDL_GetError());
 		}
 
 		this->window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
@@ -39,7 +39,6 @@ namespace Flipper {
 		this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 		SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-
 
 		IMG_Init(IMG_INIT_PNG);
 
@@ -73,11 +72,11 @@ namespace Flipper {
 		SDL_SetRenderDrawColor(renderer, r, g, b, a);
 	};
 
-	const int Renderer::get_width() const {
+	const int Renderer::get_width() {
 		return window_w;
 	};
 
-	const int Renderer::get_height() const {
+	const int Renderer::get_height() {
 		return window_h;
 	};
 
@@ -92,7 +91,7 @@ namespace Flipper {
 
 		if (temp_surface == NULL) {
 
-			FLIPPER_CORE_ERROR("Error with IMG_Load: {0}", IMG_GetError());
+			FLIPPER_CORE_ERROR("Error loading image: {0}", IMG_GetError());
 
 			throw BMPLoadFailureException();
 		}

@@ -50,6 +50,7 @@ namespace Flipper {
 		//An array representing the base render colour in RGBA format. Black by default
 		Uint8 base_color[4]{ 0x00, 0x00, 0x00, 0xFF };
 
+
 	public:
 
 		//The main Window object
@@ -60,9 +61,9 @@ namespace Flipper {
 		void update_base_color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 		//Return the width of the window in pixels.
-		const int get_width() const;
+		const int get_width();
 		//Return the height of the window in pixels.
-		const int get_height() const;
+		const int get_height();
 		//Add a RenderObject to the texture stack, which stores the data for an image to be rendered each frame. 
 		//Return a pointer of the RenderObject added.
 		RenderObject* texture_stack_push(const char* texture_name, const char* image_path, int x, int y, int w = NULL, int h = NULL);

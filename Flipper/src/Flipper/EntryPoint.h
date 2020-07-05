@@ -3,10 +3,11 @@
 
 #ifdef FLIPPER_PLATFORM_WINDOWS
 
+
 //extern tells the compiler that this method is defined in annother translation unit.
 
-extern Flipper::Application* Flipper::CreateApplication();
-	
+extern Flipper::Application* CreateApplication();
+
 int main(int argc, char** argv) {
 
 	Flipper::Log::Init();
